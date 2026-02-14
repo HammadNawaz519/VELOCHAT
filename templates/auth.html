@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Velo Chat — Auth</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --text:#30364F;
+  --muted:#ACBAC4;
+  --sand:#E1D9BC;
+  --ivory:#F0F0DB;
+  --card-radius:20px;
+  --shadow: 0 12px 36px rgba(48,54,79,0.08);
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
+html,body{height:100%;}
+body{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(180deg, var(--ivory) 0%, #fff 100%);
+  color:var(--text);
+  padding:20px;
+}
+
+/* Container */
+.container{
+  width:100%;
+  max-width:900px;
+  min-height:480px;
+  display:flex;
+  border-radius:28px;
+  border: 1px #30364F;
+  overflow:hidden;
+  box-shadow: var(--shadow);
+  background:transparent;
+  outline: 5px #30364F;
+}
+
+/* Left Panel */
+.left{
+  width:50%;
+  background:linear-gradient(135deg, rgba(172,186,196,0.98), rgba(225,217,188,0.95));
+  padding:32px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  position:relative;
+}
+.left .panel{
+  width:100%;
+  max-width:300px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.left h1{
+  font-size:24px;
+  line-height:1.1;
+  margin-bottom:6px;
+}
+.left p{
+  color:rgba(48,54,79,0.86);
+  font-size:13px;
+  line-height:1.3;
+}
+.left .cta-row{
+  margin-top:14px;
+  display:flex;
+  gap:10px;
+}
+.btn-primary{
+  padding:8px 14px;
+  border-radius:10px;
+  background:var(--text);
+  color:var(--ivory);
+  border:none;
+  cursor:pointer;
+  font-weight:700;
+  font-size:13px;
+}
+.btn-outline{
+  padding:8px 12px;
+  border-radius:10px;
+  background:transparent;
+  color:var(--text);
+  border:2px solid rgba(48,54,79,0.06);
+  cursor:pointer;
+  font-weight:700;
+  font-size:13px;
+}
+.decor-curve{
+  position:absolute;
+  right:-60px;
+  top:15px;
+  width:220px;
+  height:220px;
+  background:var(--ivory);
+  border-radius:48px 8px 48px 8px;
+  box-shadow: 0 8px 26px rgba(48,54,79,0.04);
+  transform:rotate(-12deg);
+  opacity:0.95;
+}
+
+/* Right Panel */
+.right{
+  width:50%;
+  padding:20px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+.card{
+  width:100%;
+  max-width:360px; /* smaller card */
+  background:#fff;
+  border-radius:var(--card-radius);
+  box-shadow:0 12px 36px rgba(48,54,79,0.08);
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
+.card-head{
+  padding:16px 20px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:linear-gradient(180deg, rgba(48,54,79,0.04), rgba(172,186,196,0.04));
+}
+.brand-mark{
+  width:44px;
+  height:44px;
+  border-radius:10px;
+  background:linear-gradient(180deg,var(--muted),var(--sand));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  font-size:20px;
+  color:var(--text);
+  box-shadow:0 8px 20px rgba(48,54,79,0.04);
+}
+.brand-text h3{margin:0;font-size:15px;color:var(--text);font-weight:700}
+.brand-text p{margin:0;font-size:11px;color:rgba(48,54,79,0.6)}
+
+/* Form area */
+.form-area{
+  padding:16px 20px 20px 20px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.tabs{
+  display:flex;
+  gap:6px;
+  margin-bottom:10px;
+}
+.tab{
+  flex:1;
+  text-align:center;
+  padding:6px 8px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:700;
+  color:var(--muted);
+  background:transparent;
+  border:1px solid transparent;
+  font-size:13px;
+}
+.tab.active{
+  background:linear-gradient(180deg,var(--sand),var(--ivory));
+  color:var(--text);
+  box-shadow:0 8px 24px rgba(48,54,79,0.04), inset 0 1px 0 rgba(255,255,255,0.6);
+  border:1px solid rgba(48,54,79,0.04);
+}
+
+/* Slider */
+.slider{
+  width:200%;
+  display:flex;
+  transition:transform 0.4s cubic-bezier(.22,.9,.3,1);
+}
+.panel-form{
+  width:50%;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.field{display:flex;flex-direction:column;gap:4px}
+label{font-size:12px;color:var(--text);font-weight:600}
+input[type="text"], input[type="password"], input[type="email"]{
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #eef0ec;
+  background:linear-gradient(180deg,#fff,#fbfbfb);
+  font-size:13px;
+  color:var(--text);
+  outline:none;
+  transition: all 0.3s ease;
+}
+input:focus{box-shadow:0 6px 20px rgba(48,54,79,0.06);border-color:rgba(48,54,79,0.08)}
+
+.form-actions{
+  display:flex;
+  gap:8px;
+  margin-top:6px;
+  align-items:center;
+}
+.submit{
+  padding:8px 12px;
+  border-radius:10px;
+  background:var(--text);
+  color:var(--ivory);
+  border:none;
+  cursor:pointer;
+  font-weight:700;
+  flex:1;
+  font-size:13px;
+}
+.ghost{
+  padding:8px 12px;
+  border-radius:10px;
+  background:transparent;
+  color:var(--text);
+  border:1px solid rgba(48,54,79,0.06);
+  cursor:pointer;
+  font-weight:700;
+  flex:1;
+  font-size:13px;
+}
+
+.social-row{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  margin-top:4px;
+}
+.social{
+  width:32px;
+  height:32px;
+  border-radius:8px;
+  background:var(--ivory);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid rgba(48,54,79,0.04);
+  cursor:pointer;
+  font-weight:700;
+  font-size:14px;
+}
+.small{font-size:12px;color:rgba(48,54,79,0.6);text-align:center;margin-top:4px}
+
+.card-footer{
+  padding:8px 16px;
+  border-top:1px solid rgba(48,54,79,0.03);
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.0));
+  text-align:center;
+  font-size:12px;
+  color:rgba(48,54,79,0.6);
+}
+
+/* Responsive */
+@media (max-width:880px){
+  .container{flex-direction:column;height:auto;min-height:600px;border-radius:18px}
+  .left,.right{width:100%;padding:20px;height:auto}
+  .left{order:2}
+  .right{order:1}
+  .decor-curve{display:none}
+  .slider{width:100%;flex-direction:column}
+  .panel-form{width:100%;padding-right:0}
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="left">
+    <div class="panel">
+      <h1>Hello, Welcome!</h1>
+      <p>Create an account to start chatting. Secure messages, delightful UI and instant sync. Use your phone or email to sign up.</p>
+      <div class="cta-row">
+        <button class="btn-primary" id="showRegister">Register</button>
+        <button class="btn-outline" id="showLogin">Login</button>
+      </div>
+    </div>
+    <div class="decor-curve"></div>
+  </div>
+
+  <div class="right">
+    <div class="card" role="region" aria-label="Authentication card">
+      <div class="card-head">
+        <div class="brand-mark">V</div>
+        <div class="brand-text">
+          <h3>Velo Chat</h3>
+        </div>
+      </div>
+
+      <div class="form-area">
+        <div class="tabs">
+          <div class="tab active" id="tabLogin">Login</div>
+          <div class="tab" id="tabRegister">Register</div>
+        </div>
+
+        <div class="window" style="overflow:hidden">
+          <div class="slider" id="slider">
+            <!-- Login -->
+            <div class="panel-form" aria-hidden="false">
+              <form method="POST" action="/login">
+                <div class="field">
+                  <label>Phone</label>
+                  <input name="phone" type="text" placeholder="+92 123 4567890" required>
+                </div>
+                <div class="field">
+                  <label>Password</label>
+                  <input name="password" type="password" placeholder="Password" required>
+                </div>
+                <div class="form-actions">
+                  <button type="submit" class="submit">Login</button>
+                  <button type="button" class="ghost" id="toRegisterFromLogin">Register</button>
+                </div>
+                <div class="small">or login with</div>
+                <div class="social-row">
+                  <div class="social" onclick="social('g')">G</div>
+                  <div class="social" onclick="social('f')">f</div>
+                  <div class="social" onclick="social('a')">A</div>
+                </div>
+              </form>
+            </div>
+
+            <!-- Register -->
+            <div class="panel-form" aria-hidden="true">
+              <form method="POST" action="/register">
+                <div class="field">
+                  <label>Username</label>
+                  <input name="username" type="text" placeholder="username" required>
+                </div>
+                <div class="field">
+                  <label>Phone</label>
+                  <input name="phone" type="text" placeholder="+92 123 4567890" required>
+                </div>
+                <div class="field">
+                  <label>Email</label>
+                  <input name="email" type="email" placeholder="name@gmail.com" required>
+                </div>
+                <div class="field">
+                  <label>Password</label>
+                  <input name="password" type="password" placeholder="Create a password" required>
+                </div>
+                <div class="form-actions">
+                  <button type="button" class="ghost" id="backToLogin">Back</button>
+                  <button type="submit" class="submit">Register</button>
+                </div>
+                <div class="small">By registering you agree to our Terms</div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const slider = document.getElementById('slider');
+const tabLogin = document.getElementById('tabLogin');
+const tabRegister = document.getElementById('tabRegister');
+const showRegister = document.getElementById('showRegister');
+const showLogin = document.getElementById('showLogin');
+const toRegisterFromLogin = document.getElementById('toRegisterFromLogin');
+const backToLogin = document.getElementById('backToLogin');
+
+function setMode(register){
+  slider.style.transform = register ? 'translateX(-50%)' : 'translateX(0%)';
+  tabLogin.classList.toggle('active', !register);
+  tabRegister.classList.toggle('active', register);
+}
+
+tabLogin.addEventListener('click', ()=> setMode(false));
+tabRegister.addEventListener('click', ()=> setMode(true));
+showRegister.addEventListener('click', ()=> setMode(true));
+showLogin.addEventListener('click', ()=> setMode(false));
+toRegisterFromLogin.addEventListener('click', ()=> setMode(true));
+backToLogin.addEventListener('click', ()=> setMode(false));
+
+function social(p){ alert('Social auth placeholder: ' + p); }
+
+setMode(false);
+</script>
+</body>
+</html>

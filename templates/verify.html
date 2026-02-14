@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Velo Chat — Verify OTP</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --text: #30364F;
+      --muted: #ACBAC4;
+      --sand: #E1D9BC;
+      --ivory: #F0F0DB;
+      --card-radius: 20px;
+      --shadow: 0 18px 50px rgba(48,54,79,0.08);
+      --accent-glow: rgba(48,54,79,0.06);
+    }
+    *{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
+    html,body{height:100%}
+    body{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: linear-gradient(180deg, var(--ivory) 0%, #fff 100%);
+      color:var(--text);
+      padding:24px;
+    }
+    .wrap{
+      width:100%;
+      max-width:920px;
+      display:flex;
+      gap:28px;
+      align-items:center;
+      justify-content:center;
+    }
+    .card{
+      width:680px;
+      border-radius:28px;
+      display:flex;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      background:transparent;
+    }
+    .side{
+      width:46%;
+      min-height:380px;
+      background: linear-gradient(180deg, var(--sand) 0%, var(--ivory) 100%);
+      padding:36px 28px;
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:12px;
+    }
+    .side .mark{
+      width:64px;height:64px;border-radius:16px;background:linear-gradient(180deg,var(--muted),var(--sand));display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--text);font-size:26px;box-shadow:0 12px 36px var(--accent-glow);
+    }
+    .side h3{font-size:20px;color:var(--text);margin-top:8px}
+    .side p{color:rgba(48,54,79,0.85);font-size:14px;line-height:1.35}
+    .side .cta{margin-top:12px;display:flex;gap:10px}
+    .btn{
+      padding:10px 14px;border-radius:12px;font-weight:700;border:none;cursor:pointer;
+    }
+    .btn.primary{background:var(--text);color:var(--ivory)}
+    .btn.ghost{background:transparent;border:1px solid rgba(48,54,79,0.06);color:var(--text)}
+    .form-panel{
+      width:54%;
+      background:#fff;
+      padding:28px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      align-items:stretch;
+      justify-content:center;
+    }
+    .form-head{display:flex;gap:12px;align-items:center}
+    .title{font-size:18px;color:var(--text);font-weight:700}
+    .subtitle{font-size:13px;color:var(--muted)}
+    .instructions{font-size:13px;color:rgba(48,54,79,0.7);margin-top:6px}
+    .otp-box{
+      margin-top:8px;
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      align-items:center;
+    }
+    .otp-input{
+      width:48px;height:56px;border-radius:12px;border:1px solid #eef0ec;background:linear-gradient(180deg,#fff,#fbfbfb);font-size:20px;text-align:center;color:var(--text);
+      outline:none;transition:box-shadow .15s, border-color .15s;
+    }
+    .otp-input:focus{box-shadow:0 10px 30px var(--accent-glow);border-color:rgba(48,54,79,0.08)}
+    .form-actions{display:flex;gap:12px;margin-top:6px}
+    .submit{flex:1;padding:12px;border-radius:12px;background:var(--text);color:var(--ivory);border:none;font-weight:700;cursor:pointer}
+    .link{flex:1;padding:12px;border-radius:12px;background:transparent;border:1px solid rgba(48,54,79,0.06);color:var(--text);font-weight:700;cursor:pointer}
+    .resend{margin-top:8px;text-align:center;color:var(--muted);font-size:13px}
+    .resend a{color:var(--text);text-decoration:none;font-weight:700}
+    .tiny{font-size:12px;color:rgba(48,54,79,0.55);text-align:center;margin-top:6px}
+    .card::after{
+      content:"";
+      position:absolute;
+      inset:auto -80px -40px auto;
+      width:200px;height:200px;border-radius:28px;background:linear-gradient(180deg, rgba(48,54,79,0.04), rgba(172,186,196,0.02));filter:blur(12px);opacity:0.9;z-index:0;
+    }
+
+    @media (max-width:880px){
+      .wrap{padding:12px}
+      .card{flex-direction:column;width:100%}
+      .side,.form-panel{width:100%}
+      .side{order:1;padding:20px;border-radius:18px 18px 0 0}
+      .form-panel{order:2;border-radius:0 0 18px 18px;padding:18px}
+      .otp-input{width:44px;height:50px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" role="region" aria-label="Verify OTP card">
+      <div class="side" aria-hidden="false">
+        <div class="mark">V</div>
+        <h3>Verify your number</h3>
+        <p>Enter the 6‑digit code we sent to your phone. If you didn't receive it, request a new code. This keeps your account secure.</p>
+        <div class="cta">
+          <button class="btn primary" id="sideResend">Resend</button>
+          <button class="btn ghost" id="sideHelp">Need help?</button>
+        </div>
+      </div>
+
+      <div class="form-panel">
+        <div class="form-head">
+          <div style="display:flex;flex-direction:column;">
+            <div class="title">Verify OTP</div>
+            <div class="subtitle">We sent a 6-digit code to your phone</div>
+          </div>
+        </div>
+
+        <div class="instructions">Enter the code below. The phone prefix is preserved by the server; type only the local part.</div>
+
+        <form method="POST" id="otpForm" autocomplete="off">
+          <div style="display:flex;flex-direction:column;align-items:center">
+            <div class="otp-box" aria-label="OTP input">
+              <input inputmode="numeric" pattern="\d*" maxlength="1" class="otp-input" id="d1" aria-label="digit 1" />
+              <input inputmode="numeric" pattern="\d*" maxlength="1" class="otp-input" id="d2" aria-label="digit 2" />
+              <input inputmode="numeric" pattern="\d*" maxlength="1" class="otp-input" id="d3" aria-label="digit 3" />
+              <input inputmode="numeric" pattern="\d*" maxlength="1" class="otp-input" id="d4" aria-label="digit 4" />
+              <input inputmode="numeric" pattern="\d*" maxlength="1" class="otp-input" id="d5" aria-label="digit 5" />
+              <input inputmode="numeric" pattern="\d*" maxlength="1" class="otp-input" id="d6" aria-label="digit 6" />
+            </div>
+
+            <input type="hidden" name="otp" id="otpHidden" />
+
+            <div class="form-actions" style="width:100%;max-width:380px;margin-top:18px">
+              <button type="submit" class="submit">Verify</button>
+              <button type="button" class="link" id="editNumber">Edit number</button>
+            </div>
+
+            <div class="resend" id="resendLine">Didn't receive a code? <a href="#" id="resendLink">Resend code</a> <span id="timer" style="color:var(--muted);font-weight:600"></span></div>
+            <div class="tiny">By verifying you agree to Velo Chat Terms & Privacy.</div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const inputs = Array.from(document.querySelectorAll('.otp-input'));
+    const hidden = document.getElementById('otpHidden');
+    const form = document.getElementById('otpForm');
+    const resendLink = document.getElementById('resendLink');
+    const sideResend = document.getElementById('sideResend');
+    const timerEl = document.getElementById('timer');
+    let countdown = 0;
+    function focusNext(e, idx){
+      const val = e.target.value.replace(/\D/g,'').slice(0,1);
+      e.target.value = val;
+      if(val && idx < inputs.length -1) inputs[idx+1].focus();
+      if(!val && idx > 0 && e.inputType === 'deleteContentBackward') inputs[idx-1].focus();
+    }
+    inputs.forEach((el,i)=>{
+      el.addEventListener('input',(e)=> focusNext(e,i));
+      el.addEventListener('keydown',(e)=>{
+        if(e.key === 'ArrowLeft' && i>0){ inputs[i-1].focus(); e.preventDefault(); }
+        if(e.key === 'ArrowRight' && i<inputs.length-1){ inputs[i+1].focus(); e.preventDefault(); }
+      });
+      el.addEventListener('paste',(e)=>{
+        e.preventDefault();
+        const paste = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g,'');
+        for(let k=0;k<inputs.length;k++){
+          inputs[k].value = paste[k] || '';
+        }
+        inputs[Math.min(paste.length, inputs.length-1)].focus();
+      });
+    });
+    form.addEventListener('submit',(e)=>{
+      const code = inputs.map(i=>i.value||'').join('');
+      if(code.length !== 6){ e.preventDefault(); inputs[0].focus(); return; }
+      hidden.value = code;
+    });
+    function startTimer(sec){
+      countdown = sec;
+      updateTimer();
+      const iv = setInterval(()=>{
+        countdown--;
+        updateTimer();
+        if(countdown <= 0) clearInterval(iv);
+      },1000);
+    }
+    function updateTimer(){
+      if(countdown > 0){ timerEl.textContent = ` — ${countdown}s`; resendLink.classList.add('disabled'); resendLink.style.pointerEvents='none'; }
+      else { timerEl.textContent = ''; resendLink.classList.remove('disabled'); resendLink.style.pointerEvents='auto'; }
+    }
+    resendLink.addEventListener('click',(e)=>{
+      e.preventDefault();
+      startTimer(45);
+      fetch(location.pathname + '?resend=1', {method:'POST'}).catch(()=>{});
+    });
+    sideResend.addEventListener('click',()=> resendLink.click());
+    document.getElementById('editNumber').addEventListener('click', ()=> { window.location.href = '/register'; });
+    inputs[0].focus();
+    startTimer(0);
+  </script>
+</body>
+</html>
