@@ -26,7 +26,6 @@ body{
   padding:20px;
 }
 
-/* Container */
 .container{
   width:100%;
   max-width:900px;
@@ -40,7 +39,6 @@ body{
   outline: 5px #30364F;
 }
 
-/* Left Panel */
 .left{
   width:50%;
   background:linear-gradient(135deg, rgba(172,186,196,0.98), rgba(225,217,188,0.95));
@@ -105,7 +103,6 @@ body{
   opacity:0.95;
 }
 
-/* Right Panel */
 .right{
   width:50%;
   padding:20px 24px;
@@ -116,7 +113,7 @@ body{
 }
 .card{
   width:100%;
-  max-width:360px; /* smaller card */
+  max-width:360px;
   background:#fff;
   border-radius:var(--card-radius);
   box-shadow:0 12px 36px rgba(48,54,79,0.08);
@@ -147,7 +144,6 @@ body{
 .brand-text h3{margin:0;font-size:15px;color:var(--text);font-weight:700}
 .brand-text p{margin:0;font-size:11px;color:rgba(48,54,79,0.6)}
 
-/* Form area */
 .form-area{
   padding:16px 20px 20px 20px;
   display:flex;
@@ -178,7 +174,6 @@ body{
   border:1px solid rgba(48,54,79,0.04);
 }
 
-/* Slider */
 .slider{
   width:200%;
   display:flex;
@@ -263,15 +258,159 @@ input:focus{box-shadow:0 6px 20px rgba(48,54,79,0.06);border-color:rgba(48,54,79
   color:rgba(48,54,79,0.6);
 }
 
-/* Responsive */
-@media (max-width:880px){
-  .container{flex-direction:column;height:auto;min-height:600px;border-radius:18px}
-  .left,.right{width:100%;padding:20px;height:auto}
-  .left{order:2}
-  .right{order:1}
-  .decor-curve{display:none}
-  .slider{width:100%;flex-direction:column}
-  .panel-form{width:100%;padding-right:0}
+@media (max-width:768px){
+  .container{
+    flex-direction:column;
+  }
+  .left, .right{
+    width:100%;
+  }
+}
+
+@media (max-width:420px){
+  .container{
+    max-width:100%;
+    margin:8px;
+    min-height:unset;
+    border-radius:12px;
+    box-shadow: 0 10px 30px rgba(48,54,79,0.06);
+    outline:none;
+    border:none;
+    flex-direction:column;
+  }
+
+  .left{
+    width:100%;
+    padding:20px 16px;
+    height:auto;
+    background:linear-gradient(135deg, rgba(172,186,196,0.98), rgba(225,217,188,0.95));
+  }
+
+  .right{
+    width:100%;
+    padding:16px 14px;
+    height:auto;
+  }
+
+  .left .panel{
+    max-width:100%;
+  }
+  .left h1{
+    font-size:20px;
+    line-height:1.15;
+  }
+  .left p{
+    font-size:13px;
+  }
+  .cta-row{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .btn-primary, .btn-outline{
+    width:100%;
+    padding:12px 14px;
+  }
+
+  .card{
+    width:100%;
+    max-width:100%;
+    border-radius:12px;
+  }
+  .card-head{
+    padding:12px 14px;
+    gap:8px;
+  }
+  .brand-mark{
+    width:36px;
+    height:36px;
+    font-size:16px;
+  }
+  .brand-text h3{
+    font-size:14px;
+  }
+
+  .form-area{
+    padding:12px;
+  }
+  .tabs{
+    gap:6px;
+  }
+  .tab{
+    padding:8px 10px;
+    font-size:14px;
+  }
+
+  .panel-form{
+    width:100%;
+    padding-right:0;
+  }
+
+  input[type="text"], input[type="password"], input[type="email"]{
+    padding:12px 14px;
+    font-size:15px;
+    border-radius:10px;
+  }
+
+  .form-actions{
+    flex-direction:column;
+    gap:10px;
+  }
+  .submit, .ghost{
+    width:100%;
+    padding:12px 14px;
+    font-size:15px;
+  }
+
+  .social-row{
+    justify-content:center;
+  }
+  .social{
+    width:36px;
+    height:36px;
+    border-radius:10px;
+    font-size:14px;
+  }
+
+  .card-footer{
+    padding:10px 12px;
+    font-size:12px;
+  }
+
+  .decor-curve{
+    display:none;
+  }
+  .container, .left, .right, .card {
+    overflow:visible;
+  }
+}
+
+@media (max-width:360px){
+  .left h1{
+    font-size:18px;
+  }
+  .left p{
+    font-size:12px;
+  }
+  .brand-mark{
+    width:32px;
+    height:32px;
+    font-size:14px;
+  }
+  .tabs{
+    gap:4px;
+  }
+  .tab{
+    font-size:13px;
+    padding:8px;
+  }
+  .btn-primary, .btn-outline{
+    padding:10px 12px;
+  }
+  input[type="text"], input[type="password"], input[type="email"]{
+    font-size:14px;
+    padding:10px 12px;
+  }
 }
 </style>
 </head>
@@ -306,7 +445,6 @@ input:focus{box-shadow:0 6px 20px rgba(48,54,79,0.06);border-color:rgba(48,54,79
 
         <div class="window" style="overflow:hidden">
           <div class="slider" id="slider">
-            <!-- Login -->
             <div class="panel-form" aria-hidden="false">
               <form method="POST" action="/login">
                 <div class="field">
@@ -330,7 +468,6 @@ input:focus{box-shadow:0 6px 20px rgba(48,54,79,0.06);border-color:rgba(48,54,79
               </form>
             </div>
 
-            <!-- Register -->
             <div class="panel-form" aria-hidden="true">
               <form method="POST" action="/register">
                 <div class="field">
