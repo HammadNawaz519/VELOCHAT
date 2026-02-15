@@ -104,13 +104,78 @@
     }
 
     @media (max-width:880px){
-      .wrap{padding:12px}
-      .card{flex-direction:column;width:100%}
-      .side,.form-panel{width:100%}
-      .side{order:1;padding:20px;border-radius:18px 18px 0 0}
-      .form-panel{order:2;border-radius:0 0 18px 18px;padding:18px}
-      .otp-input{width:44px;height:50px}
-    }
+  .wrap{
+    padding:12px;
+  }
+
+  .card{
+    flex-direction:column;
+    width:100%;
+    max-width:380px; /* mobile width */
+    margin:0 auto;   /* center horizontally */
+  }
+
+  .form-panel,
+  .side{
+    width:100%;
+  }
+
+  /* FORM PANEL ON TOP */
+  .form-panel{
+    order:1;
+    border-radius:18px 18px 0 0;
+    padding:16px;
+  }
+
+  /* SIDE PANEL BELOW */
+  .side{
+    order:2;
+    padding:16px;
+    border-radius:0 0 18px 18px;
+    text-align:center;
+  }
+
+  /* OTP inputs smaller and flexible */
+  .otp-box{
+    gap:8px;
+    flex-wrap:wrap; /* wrap in small screens */
+  }
+  .otp-input{
+    width:40px;
+    height:48px;
+    font-size:18px;
+  }
+
+  .side h3{
+    font-size:18px;
+  }
+  .side p{
+    font-size:13px;
+  }
+
+  .btn{
+    padding:10px 12px;
+    font-size:13px;
+  }
+
+  .form-head .title{
+    font-size:16px;
+  }
+  .form-head .subtitle{
+    font-size:12px;
+  }
+
+  .instructions{
+    font-size:12px;
+  }
+  .resend{
+    font-size:12px;
+    word-wrap: break-word;
+  }
+}
+
+
+
   </style>
 </head>
 <body>
