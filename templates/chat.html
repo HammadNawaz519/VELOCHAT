@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Velo Chat — Messages</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+
   <style>
     :root{
       --text: #30364F;
@@ -15,8 +16,16 @@
       --sent: #30364F;
       --recv: #fff8ea;
     }
-    *{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    }
+
     html,body{height:100%}
+
     body{
       min-height:100vh;
       display:flex;
@@ -24,7 +33,6 @@
       align-items:center;
       background: linear-gradient(180deg, #f0f0db 0%, #fff 100%);
       color:var(--text);
-      padding:0;
     }
 
     .app-top{
@@ -36,15 +44,26 @@
       padding:12px 20px;
       border-bottom:1px solid rgba(48,54,79,0.05);
     }
+
     .brand-inline{
       display:flex;
       gap:12px;
       align-items:center;
     }
+
     .brand-mark{
-      width:44px;height:44px;border-radius:10px;background:linear-gradient(180deg,var(--muted),#E1D9BC);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--text);font-size:18px;
+      width:44px;
+      height:44px;
+      border-radius:10px;
+      background:linear-gradient(180deg,var(--muted),#E1D9BC);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:800;
+      font-size:18px;
     }
-    .brand-title{font-weight:700;color:var(--text)}
+
+    .brand-title{font-weight:700}
     .user-id{color:var(--muted);font-size:0.95rem}
 
     .wrap{
@@ -63,14 +82,37 @@
       display:flex;
       flex-direction:column;
     }
+
     .search-wrap{padding:16px}
-    .search-wrap input{width:100%;padding:10px 12px;border-radius:12px;border:1px solid rgba(48,54,79,0.06);background:#fff;outline:none;color:var(--text)}
+
+    .search-wrap input{
+      width:100%;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid rgba(48,54,79,0.06);
+      background:#fff;
+      outline:none;
+    }
+
     .list{flex:1;overflow:auto}
-    .list .item{padding:14px 16px;border-bottom:1px solid rgba(48,54,79,0.02);display:flex;gap:10px;align-items:center;cursor:pointer}
-    .list .item:hover{background: rgba(48,54,79,0.02)}
-    .list .item .meta{display:flex;flex-direction:column}
-    .list .item b{font-size:14px;color:var(--text)}
-    .list .item small{color:var(--muted);font-size:13px}
+
+    .list .item{
+      padding:14px 16px;
+      border-bottom:1px solid rgba(48,54,79,0.02);
+      display:flex;
+      gap:10px;
+      align-items:center;
+      cursor:pointer;
+    }
+
+    .list .item:hover{
+      background: rgba(48,54,79,0.02);
+    }
+
+    .list .item .meta{
+      display:flex;
+      flex-direction:column;
+    }
 
     .chat-area{
       flex:1;
@@ -91,16 +133,23 @@
       border-bottom:1px solid rgba(48,54,79,0.04);
       background: linear-gradient(180deg, rgba(48,54,79,0.02), rgba(172,186,196,0.01));
     }
-    .chat-header .to{
+
+    .to{
       display:flex;
       gap:12px;
       align-items:center;
     }
-    .to .avatar{
-      width:44px;height:44px;border-radius:10px;background:var(--muted);display:flex;align-items:center;justify-content:center;color:var(--text);font-weight:800
+
+    .avatar{
+      width:44px;
+      height:44px;
+      border-radius:10px;
+      background:var(--muted);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:800;
     }
-    .to .name{font-weight:700;color:var(--text)}
-    .to .meta{color:var(--muted);font-size:13px}
 
     .messages{
       flex:1;
@@ -123,19 +172,27 @@
       box-shadow: 0 6px 18px rgba(48,54,79,0.02);
       word-wrap:break-word;
     }
+
     .msg.received{
       background: var(--recv);
-      color: var(--text);
       align-self:flex-start;
       border-bottom-left-radius:6px;
     }
+
     .msg.sent{
       background: var(--sent);
-      color: #fff8ea;
+      color:#fff8ea;
       align-self:flex-end;
       border-bottom-right-radius:6px;
     }
-    .msg .time{display:block;font-size:11px;color:var(--muted);margin-top:6px;text-align:right}
+
+    .msg .time{
+      display:block;
+      font-size:11px;
+      color:var(--muted);
+      margin-top:6px;
+      text-align:right;
+    }
 
     .footer{
       padding:14px 18px;
@@ -145,152 +202,163 @@
       align-items:center;
       background:#fbfbfb;
     }
-    .footer input{
-      flex:1;padding:12px 14px;border-radius:14px;border:1px solid rgba(48,54,79,0.06);outline:none;font-size:14px;color:var(--text)
-    }
-    .footer button{padding:10px 14px;border-radius:14px;border:none;background:var(--text);color:#fff8ea;cursor:pointer;font-weight:700}
 
+    .footer input{
+      flex:1;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(48,54,79,0.06);
+      outline:none;
+    }
+
+    .footer button{
+      padding:10px 14px;
+      border-radius:14px;
+      border:none;
+      background:var(--text);
+      color:#fff8ea;
+      cursor:pointer;
+      font-weight:700;
+    }
+
+    /* ✅ MOBILE SPLIT VIEW */
     @media (max-width: 980px){
-      .wrap{flex-direction:column;gap:0;height:auto}
-      .sidebar{display:none}
-      .chat-area{border-radius:0;width:100%;height:calc(100vh - 60px);min-height:0}
+      .wrap{
+        flex-direction:column;
+        height:calc(100vh - 60px);
+      }
+
+      .sidebar{
+        width:100%;
+        height:40%;
+        border-right:none;
+        border-bottom:1px solid rgba(48,54,79,0.05);
+      }
+
+      .chat-area{
+        width:100%;
+        height:60%;
+        border-radius:0;
+      }
     }
   </style>
 </head>
+
 <body>
-  <div class="app-top">
-    <div class="brand-inline">
-      <div class="brand-mark">V</div>
-      <div>
-        <div class="brand-title">Velo Chat</div>
-        <div class="user-id">Secure · Calm · Friendly</div>
-      </div>
+
+<div class="app-top">
+  <div class="brand-inline">
+    <div class="brand-mark">V</div>
+    <div>
+      <div class="brand-title">Velo Chat</div>
+      <div class="user-id">Secure · Calm · Friendly</div>
     </div>
-    <div class="user-id">My ID: <span id="display-id">...</span></div>
   </div>
+  <div class="user-id">My ID: <span id="display-id">...</span></div>
+</div>
 
-  <div class="wrap">
-    <aside class="sidebar">
-      <div class="search-wrap">
-        <input id="search" placeholder="Search contacts...">
-      </div>
-      <div id="users" class="list"></div>
-    </aside>
+<div class="wrap">
+  <aside class="sidebar">
+    <div class="search-wrap">
+      <input id="search" placeholder="Search contacts...">
+    </div>
+    <div id="users" class="list"></div>
+  </aside>
 
-    <section class="chat-area">
-      <div class="chat-header">
-        <div class="to">
-          <div class="avatar" id="chatAvatar">#</div>
-          <div>
-            <div class="name" id="chatName">Select a conversation</div>
-            <div class="meta" id="chatMeta"> — </div>
-          </div>
+  <section class="chat-area">
+    <div class="chat-header">
+      <div class="to">
+        <div class="avatar" id="chatAvatar">#</div>
+        <div>
+          <div class="name" id="chatName">Select a conversation</div>
+          <div class="meta" id="chatMeta"> — </div>
         </div>
-        <div style="color:var(--muted);font-size:13px">Online</div>
       </div>
+      <div style="color:var(--muted);font-size:13px">Online</div>
+    </div>
 
-      <div id="messages" class="messages"></div>
+    <div id="messages" class="messages"></div>
 
-      <div class="footer">
-        <input id="msg" placeholder="Write a message..." autocomplete="off">
-        <button id="send">Send</button>
-      </div>
-    </section>
-  </div>
+    <div class="footer">
+      <input id="msg" placeholder="Write a message..." autocomplete="off">
+      <button id="send">Send</button>
+    </div>
+  </section>
+</div>
 
-  <div id="mydata" data-myid="{{ my_id }}" style="display:none;"></div>
+<div id="mydata" data-myid="{{ my_id }}" style="display:none;"></div>
 
-  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
-  <script>
-    const myId = parseInt(document.getElementById('mydata').dataset.myid) || null;
-    document.getElementById('display-id').innerText = myId || 'Guest';
-    const socket = io();
-    let currentRoom = null;
-    let currentReceiver = null;
-    const usersDiv = document.getElementById("users");
-    const messagesDiv = document.getElementById("messages");
-    const chatName = document.getElementById("chatName");
-    const chatMeta = document.getElementById("chatMeta");
-    const chatAvatar = document.getElementById("chatAvatar");
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 
-    async function loadRecentChats(){
-      try{
-        const res = await fetch('/recent_chats');
-        const rows = await res.json();
-        usersDiv.innerHTML = '';
-        const header = document.createElement('div');
-        header.style.padding='12px 16px'; header.style.color='var(--muted)'; header.style.fontWeight='700';
-        header.innerText='Recent Chats'; usersDiv.appendChild(header);
-        rows.forEach(r=>{
-          const div=document.createElement('div');
-          div.className='item';
-          div.innerHTML=`<div style="width:44px;height:44px;border-radius:10px;background:var(--muted);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--text);margin-right:10px">${r.username.charAt(0) || 'U'}</div>
-            <div class="meta"><b>${r.username}</b><small>${r.message||''}</small></div>`;
-          div.onclick=()=>openChat(r.id,r.username); usersDiv.appendChild(div);
-        });
-      }catch(e){console.error(e);}
-    }
-    loadRecentChats();
+<script>
+const myId = parseInt(document.getElementById('mydata').dataset.myid) || null;
+document.getElementById('display-id').innerText = myId || 'Guest';
+const socket = io();
+let currentRoom = null;
+let currentReceiver = null;
 
-    document.getElementById('search').addEventListener('input', e=>{
-      clearTimeout(window.qTimeout);
-      window.qTimeout=setTimeout(async ()=>{
-        const q=e.target.value.trim();
-        if(!q){ loadRecentChats(); return; }
-        const res=await fetch(`/search_users?q=${encodeURIComponent(q)}`);
-        const users=await res.json(); usersDiv.innerHTML='';
-        const header=document.createElement('div'); header.style.padding='12px 16px'; header.style.color='var(--muted)'; header.style.fontWeight='700';
-        header.innerText='Search Results'; usersDiv.appendChild(header);
-        users.forEach(u=>{
-          const div=document.createElement('div'); div.className='item';
-          div.innerHTML=`<div style="width:44px;height:44px;border-radius:10px;background:var(--muted);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--text);margin-right:10px">${u.username.charAt(0)||'U'}</div>
-            <div class="meta"><b>${u.username}</b><small></small></div>`;
-          div.onclick=()=>openChat(u.id,u.username); usersDiv.appendChild(div);
-        });
-      },300);
-    });
+const usersDiv = document.getElementById("users");
+const messagesDiv = document.getElementById("messages");
+const chatName = document.getElementById("chatName");
+const chatMeta = document.getElementById("chatMeta");
+const chatAvatar = document.getElementById("chatAvatar");
 
-    async function openChat(id,username){
-      currentReceiver=id;
-      currentRoom='chat_'+Math.min(myId||0,id)+'_'+Math.max(myId||0,id);
-      chatName.textContent=username;
-      chatMeta.textContent=`Chat ID: ${id}`;
-      chatAvatar.textContent=username.charAt(0).toUpperCase();
-      messagesDiv.innerHTML='';
-      socket.emit('join',{room:currentRoom});
-      try{
-        const res=await fetch(`/messages/${id}`);
-        const msgs=await res.json();
-        msgs.forEach(m=>appendMessage(m));
-      }catch(e){console.error(e);}
-    }
+async function loadRecentChats(){
+  const res = await fetch('/recent_chats');
+  const rows = await res.json();
+  usersDiv.innerHTML = '';
+  rows.forEach(r=>{
+    const div=document.createElement('div');
+    div.className='item';
+    div.innerHTML=`<div class="avatar">${r.username.charAt(0)}</div>
+      <div class="meta"><b>${r.username}</b><small>${r.message||''}</small></div>`;
+    div.onclick=()=>openChat(r.id,r.username);
+    usersDiv.appendChild(div);
+  });
+}
+loadRecentChats();
 
-    function appendMessage(data){
-      const div=document.createElement('div'); div.classList.add('msg');
-      const isSent=(data.sender_id||data.sender)===myId;
-      div.classList.add(isSent?'sent':'received');
-      const text=document.createElement('div'); text.innerHTML=data.message ? data.message.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'):''; div.appendChild(text);
-      const time=document.createElement('span'); time.className='time';
-      const ts=data.timestamp||data.time||''; time.textContent=ts?new Date(ts).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}):''; div.appendChild(time);
-      messagesDiv.appendChild(div);
-      messagesDiv.scrollTop = messagesDiv.scrollHeight;
-    }
+async function openChat(id,username){
+  currentReceiver=id;
+  currentRoom='chat_'+Math.min(myId||0,id)+'_'+Math.max(myId||0,id);
+  chatName.textContent=username;
+  chatMeta.textContent=`Chat ID: ${id}`;
+  chatAvatar.textContent=username.charAt(0).toUpperCase();
+  messagesDiv.innerHTML='';
+  socket.emit('join',{room:currentRoom});
+  const res=await fetch(`/messages/${id}`);
+  const msgs=await res.json();
+  msgs.forEach(m=>appendMessage(m));
+}
 
-    document.getElementById('send').addEventListener('click',sendMessage);
-    document.getElementById('msg').addEventListener('keypress',e=>{if(e.key==='Enter') sendMessage();});
-    function sendMessage(){
-      const input=document.getElementById('msg'); const message=input.value.trim();
-      if(!message||!currentReceiver) return;
-      socket.emit('send_message',{sender:myId,receiver:currentReceiver,message}); input.value='';
-    }
+function appendMessage(data){
+  const div=document.createElement('div');
+  div.classList.add('msg');
+  const isSent=(data.sender_id||data.sender)===myId;
+  div.classList.add(isSent?'sent':'received');
+  div.innerHTML=data.message;
+  messagesDiv.appendChild(div);
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
 
-    socket.on('receive_message',data=>{
-      const room='chat_'+Math.min(data.sender,data.receiver)+'_'+Math.max(data.sender,data.receiver);
-      if(room===currentRoom) appendMessage(data);
-      loadRecentChats();
-    });
-    socket.on('update_recents',()=>loadRecentChats());
-    socket.on('connect',()=>{if(currentRoom) socket.emit('join',{room:currentRoom});});
-  </script>
+document.getElementById('send').addEventListener('click',sendMessage);
+document.getElementById('msg').addEventListener('keypress',e=>{
+  if(e.key==='Enter') sendMessage();
+});
+
+function sendMessage(){
+  const input=document.getElementById('msg');
+  const message=input.value.trim();
+  if(!message||!currentReceiver) return;
+  socket.emit('send_message',{sender:myId,receiver:currentReceiver,message});
+  input.value='';
+}
+
+socket.on('receive_message',data=>{
+  appendMessage(data);
+  loadRecentChats();
+});
+</script>
+
 </body>
 </html>
