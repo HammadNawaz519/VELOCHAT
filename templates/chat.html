@@ -272,6 +272,7 @@
     backBtn.addEventListener('click', () => {
       document.querySelector('.sidebar').classList.remove('hidden');
       document.querySelector('.chat-area').classList.remove('active');
+      document.querySelector('.app-top').style.display = 'flex';
     });
 
     async function loadRecentChats(){
@@ -327,6 +328,7 @@
       if(window.innerWidth <= 980){
         document.querySelector('.sidebar').classList.add('hidden');
         document.querySelector('.chat-area').classList.add('active');
+        document.querySelector('.app-top').style.display = 'none';
         setTimeout(()=>{ messagesDiv.scrollTop = messagesDiv.scrollHeight; }, 0);
         setTimeout(()=>{ document.getElementById('msg').focus(); }, 200);
       }
@@ -363,6 +365,7 @@
       if(window.innerWidth > 980){
         document.querySelector('.sidebar').classList.remove('hidden');
         document.querySelector('.chat-area').classList.remove('active');
+        document.querySelector('.app-top').style.display = 'flex';
       }
     });
     document.addEventListener('focusin', (e) => {
